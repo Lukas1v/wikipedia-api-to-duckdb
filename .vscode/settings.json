@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "DuckDB",
+            "name": "duckdb",
+            "database": "${workspaceFolder:wikipedia-api-to-duckdb}/wiki_recent_changes.db"
+        }
+    ]
+}

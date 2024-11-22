@@ -1,0 +1,30 @@
+{
+  "name": "DBT and DuckDB Dev Container",
+  "build": {
+      "dockerfile": "Dockerfile",
+      "context": "."
+
+  },
+  "postCreateCommand": "bash .devcontainer/post_script.sh",
+  "customizations": {
+      "vscode": {
+          "settings": {
+              "terminal.integrated.defaultProfile.linux": "/bin/bash",
+              "dev.containers.mountWaylandSocket": false
+          },
+          "extensions": [
+            "ms-python.python",
+				    "ms-python.vscode-pylance",
+            "ms-azuretools.vscode-docker"
+          ]
+      }
+  },
+  "forwardPorts": [],
+
+// Add WSL-specific settings
+"workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
+
+
+
+}
