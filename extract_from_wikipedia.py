@@ -21,6 +21,7 @@ def fetch_recent_changes(start_time: str, end_time: str) -> List[Dict[str, Any]]
     }
     changes = []
     while True:
+        print("Number of entries fetched: ", str(len(changes)))
         response = requests.get(url, params=params).json()
         if "query" in response and "recentchanges" in response["query"]:
             changes.extend(response["query"]["recentchanges"])
@@ -28,6 +29,8 @@ def fetch_recent_changes(start_time: str, end_time: str) -> List[Dict[str, Any]]
             params.update(response["continue"])
         else:
             break
+    
+    
 
     return changes
 
