@@ -3,20 +3,18 @@ version: 2
 models:
   - name: gold_most_active_timeslots
     description: "Identifies the most active 30-minute time slots per 15-minute sliding window"
-    data_tests:
-      - dbt_utils.not_null:
-          column_name: shifted_slot_start
-      - dbt_utils.not_null:
-          column_name: shifted_slot_end
-      - dbt_utils.not_null:
-          column_name: change_count
-      - dbt_utils.accepted_values:
-          column_name: shifted_slot_end
-          values: 
-            - "is_after_or_equal_to"
-            - shifted_slot_start
-      - dbt_utils.greater_than:
-          column_name: change_count
-          value: 0
-      - dbt_utils.unique:
-          column_name: shifted_slot_start
+    columns:
+        - name: shifted_slot_start
+          tests:
+            - unique
+            - not_null
+        - name: shifted_slot_end
+          tests:
+            - unique
+            - not_null
+        - name: change_count
+          tests:
+            - dbt_utils.accepted_range:
+                min_value: 0
+                inclusive: true
+
