@@ -1,0 +1,5 @@
+sources:
+  - name: main
+    tables:
+      - name: bronze_recent_changes 
+        description: "The bronze recent changes table containing raw data from Wikipedia"

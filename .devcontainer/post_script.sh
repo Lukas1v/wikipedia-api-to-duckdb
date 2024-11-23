@@ -1,5 +1,5 @@
+#in case the devcontainer is rebuilt, the .dbt/profiles.yml needs to be recreated
 mkdir /home/vscode/.dbt
-
 cat <<EOF > /home/vscode/.dbt/profiles.yml
 dbt_wikipedia_changes:
   target: dev
