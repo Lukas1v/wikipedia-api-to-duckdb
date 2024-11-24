@@ -34,16 +34,20 @@ Transformations happen according to a medaillon architecture:
 
 dbt tests for gold_most_active_timeslots can be found in [gold_most_active_timeslots.yml](dbt_wikipedia_changes/models/gold_most_active_timeslots.yml)
 
-## running the pipeline
+## Running the pipeline
 
 [Run unit tests, extract, load and transform](run_all.sh)
 
 [Verify intermediate results and end result in notebook](python/manual_test_queries_duckdb.ipynb)
 
 
-## possible improvements
+## Possible improvements
 The following points could be possible improvements but were not implemented due to time constraints:
-- Run an async pipeline using smaller intervals instead of one big one
-- Store raw json data coming from the API on a local filesystem or storage account
-    - Now a minor transformation already happens before the data is inserted
+- Run an async pipeline using smaller intervals instead of one big one for better performance
+- Store raw json data coming from the API on a local filesystem or a cloud storage account
+    - Now a minor transformation on the json keys already happens before the data is inserted
     - If the DuckDB load fails, all the data has to be retrieved again
+- A meaningful data model: the main model is now just one big table in the silver layer
+    - which works perfectly to answer this one question but might be less adequate for other use-cases
+- dbt tests on the content and consistency of the models instead of simply checking for nulls and unique values
+    - e.g. testing whether the total count of the non-overlapping time slots in gold_most_active_timeslots equals the total count of silver_recent_changes
