@@ -10,7 +10,7 @@ WITH time_slots AS (
         -- Generate the end of the 30-minute window
         DATE_TRUNC('minute', timestamp) - INTERVAL '1 minute' * (EXTRACT(minute FROM timestamp) % 15) + INTERVAL '30 minute' AS shifted_slot_end
     FROM 
-        {{ ref('silver_recent_changes') }}  -- or your table name where timestamp is available
+        {{ ref('silver_recent_changes') }}
 ),
 change_counts AS (
     -- Counting the changes in each 30-minute slot
